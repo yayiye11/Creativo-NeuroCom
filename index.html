@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroCom | Telecomunicaciones Integradas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /*Color*/
+        :root {
+            --bg-color: #050505;
+            --neon-blue: #00f3ff;
+            --neon-purple: #bc13fe;
+            --text-main: #e0e0e0;
+            --glass-bg: rgba(20, 20, 25, 0.7);
+            --glass-border: rgba(0, 243, 255, 0.3);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Rajdhani', sans-serif;
+            background-image: radial-gradient(circle at 50% -20%, #1a1a2e, #050505);
+            background-attachment: fixed;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .fecha-top {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            color: var(--neon-blue);
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.6);
+            z-index: 10;
+        }
+
+        /*Sección de Cabecera*/
+        .hero {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 5rem);
+            color: #fff;
+            text-shadow: 0 0 10px var(--neon-blue), 0 0 40px var(--neon-blue);
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            color: #aaa;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        /*Botón de Neón*/
+        .btn-neon {
+            background: transparent;
+            color: var(--neon-blue);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding: 15px 30px;
+            border: 2px solid var(--neon-blue);
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px inset transparent;
+        }
+
+        .btn-neon:hover {
+            background: var(--neon-blue);
+            color: #000;
+            box-shadow: 0 0 20px var(--neon-blue), 0 0 40px inset var(--neon-blue);
+        }
+
+        /*Sección de Catálogo*/
+        .catalogo {
+            padding: 50px 20px 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex: 1;
+        }
+
+        .catalogo h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--neon-purple);
+            text-shadow: 0 0 10px rgba(188, 19, 254, 0.5);
+        }
+
+        .grid-productos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        /*Tarjetas*/
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.15);
+            border-color: var(--neon-blue);
+        }
+
+        /*Estilo para las imágenes de producto*/
+        .card-img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.1);
+        }
+
+        .card h3 {
+            color: var(--neon-blue);
+            margin-top: 0;
+            font-size: 1.4rem;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #ccc;
+        }
+
+        .precio {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #fff;
+            margin: 20px 0;
+            margin-top: auto;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            font-size: 0.9rem;
+        }
+
+        ul li {
+            margin-bottom: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        ul li strong {
+            color: var(--neon-purple);
+        }
+
+        /*Botón de compra*/
+        .btn-buy {
+            width: 100%;
+            background: rgba(188, 19, 254, 0.2);
+            color: #fff;
+            border: 1px solid var(--neon-purple);
+            padding: 12px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 5px;
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            box-sizing: border-box;
+        }
+
+        .btn-buy:hover {
+            background: var(--neon-purple);
+            box-shadow: 0 0 15px var(--neon-purple);
+        }
+
+        /*ESTILOS DEL FOOTER*/
+        .footer-institucional {
+            background: rgba(10, 10, 15, 0.85);
+            border-top: 1px solid var(--neon-blue);
+            padding: 20px 50px;
+            box-shadow: 0 -5px 20px rgba(0, 243, 255, 0.1);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; 
+        }
+
+        .logo-uni {
+            max-height: 80px; 
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-uni:hover {
+            transform: scale(1.05);
+        }
+
+        .texto-institucional {
+            text-align: center;
+            flex: 1;
+            margin: 0 20px;
+        }
+
+        .texto-institucional p {
+            margin: 5px 0;
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+
+        .texto-institucional span.highlight {
+            color: var(--neon-blue);
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="fecha-top">MARZO 2076</div>
+
+    <header class="hero">
+        <h1>NeuroCom</h1>
+        <p>La red ya no está en tu bolsillo. Está en ti. Descubre la nueva generación de telecomunicaciones neuronales.</p>
+        <a href="#productos" class="btn-neon">Explorar Catálogo</a>
+    </header>
+
+    <section id="productos" class="catalogo">
+        <h2>Implantes & Mejoras</h2>
+        
+        <div class="grid-productos">
+            
+            <div class="card">
+                <img src="Imagenes/Cortex_Link.png" alt="Implante cerebral Córtex-Link de grafeno" class="card-img">
+                
+                <h3>Córtex-Link</h3>
+                <p>Modulador Neuronal 8G. Conéctate a la HoloNet global con solo pensarlo. Interfaz directa cerebro-nube.</p>
+                <ul>
+                    <li><strong>Ancho de banda:</strong> <span>500 Tbps</span></li>
+                    <li><strong>Latencia:</strong> <span>< 0.01 ms</span></li>
+                    <li><strong>Material:</strong> <span>Grafeno bio-activo</span></li>
+                    <li><strong>Multiplexación:</strong> <span>WDM Bioeléctrica</span></li>
+                </ul>
+                <div class="precio">4.500 €</div>
+                <a href="cortex_link.html" class="btn-buy">Ver detalles y comprar</a>
+            </div>
+
+            <div class="card">
+                <img src="Imagenes/NeuroWall.png" alt="Representación de un cortafuegos cuántico mental" class="card-img">
+
+                <h3>NeuroWall Pro</h3>
+                <p>Cortafuegos Cuántico Personal. Protege tu córtex visual de intrusiones comerciales y malware cognitivo.</p>
+                <ul>
+                    <li><strong>Seguridad:</strong> <span>Encriptación QKD</span></li>
+                    <li><strong>Filtro:</strong> <span>Espectro biomagnético</span></li>
+                    <li><strong>Defensa:</strong> <span>Anti-Spam Neuronal</span></li>
+                </ul>
+                <div class="precio">1.200 €</div>
+                <a href="neurowall.html" class="btn-buy">Ver detalles y comprar</a>
+            </div>
+
+            <div class="card">
+                <img src="Imagenes/Amplificador_LiFi.png" alt="Ojo con lente de contacto recibiendo señal Li-Fi" class="card-img">
+
+                <h3>Amplificador Li-Fi</h3>
+                <p>Para zonas sin cobertura 8G. Recibe datos a través de los fotones del alumbrado público urbano.</p>
+                <ul>
+                    <li><strong>Receptor:</strong> <span>Lente Fotónica</span></li>
+                    <li><strong>Espectro:</strong> <span>Luz visible (THz)</span></li>
+                    <li><strong>Estándar:</strong> <span>IEEE 802.11bb-60</span></li>
+                </ul>
+                <div class="precio">850 €</div>
+                <a href="amplificador_lifi.html" class="btn-buy">Ver detalles y comprar</a>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer-institucional">
+        <img src="Imagenes/UAM.png" alt="Logo Universidad Autónoma de Madrid" class="logo-uni">
+        
+        <div class="texto-institucional">
+            <p><span class="highlight">Ingeniería y Sociedad - Creativo</span></p>
+            <p>Realizado por: <span class="highlight">Yayi Ye</span></p>
+            <p>Profesora: <span class="highlight">Ruth Cobos Pérez</span></p>
+        </div>
+
+        <img src="Imagenes/EPS.png" alt="Logo Escuela Politécnica Superior" class="logo-uni">
+    </footer>
+
+</body>
+</html>
